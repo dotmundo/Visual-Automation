@@ -91,20 +91,20 @@
 				<label for="source">How did you find out about us?</label><br />
 				<select name="source">
 					web search, advertisement, website, word-of-mouth, voice from inside my head)
-					<option value=>-</option>
-					<option value=1>Web Search</option>
-					<option value=2>Website</option>
-					<option value=3>Word of mouth</option>
-					<option value=4>Voice from inside my head</option>
+					<option value='' <?php echo set_select('source', '', TRUE); ?> >-</option>
+					<option value=1 <?php echo set_select('source', '1'); ?> >Web Search</option>
+					<option value=2 <?php echo set_select('source', '2'); ?> >Website</option>
+					<option value=3 <?php echo set_select('source', '3'); ?> >Word of mouth</option>
+					<option value=4 <?php echo set_select('source', '4'); ?> >Voice from inside my head</option>
 				</select>
 			</p>
 
 			<p>
 				<label for="mac_pc">Mac or PC *</label><br />
 				<select name="mac_pc">
-					<option value=>-</option>
-					<option value=1>Mac</option>
-					<option value=2>PC</option>
+					<option value='' <?php echo set_select('mac_pc', '', TRUE); ?> >-</option>
+					<option value=1 <?php echo set_select('mac_pc', '1'); ?> >Mac</option>
+					<option value=2 <?php echo set_select('mac_pc', '2'); ?> >PC</option>
 				</select>
 			</p>
 
