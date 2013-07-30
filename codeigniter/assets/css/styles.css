@@ -1,0 +1,16 @@
+body {
+	font-family: verdana;
+	font-size: 12px;
+	width: 960px;
+	margin-left: 100px;
+	margin-right: 100px;
+}
+
+label {
+	font-weight: bold;
+}
+
+.error {
+	color: red;
+	font-style: italic;
+}
