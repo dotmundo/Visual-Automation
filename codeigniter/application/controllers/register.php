@@ -21,7 +21,7 @@ class Register extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper( array('form', 'url') );
-//		$options = array('one' => 'one', 'two'=>'two','three'=>'three');
+    	$this->load->library('form_validation');
 	}
 
 	/**
@@ -30,7 +30,7 @@ class Register extends CI_Controller {
 	 *
 	 **/
 	public function index() {
-		$this->load->view('register');
+		$this->load->template('register');
 	}
 
 	/**
@@ -40,15 +40,60 @@ class Register extends CI_Controller {
 	 **/
 	public function signup() {
 		log_message('debug', "*** signup");
-    	$this->load->library('form_validation');
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
             
       	if ($this->form_validation->run() == FALSE) {
-        	$this->load->view('register');
+        	$this->load->template('register');
       	}
       	else {
-        	$this->load->view('register_confirmation');
+      		$hidden = array();
+			foreach($_POST as $field_name=> $value) {
+  				$hidden[$field_name] = $value;
+			}
+			print_r($hidden);
+        	$this->load->template('register_confirmation', array('hidden'=> $hidden));
       	}
+	}
+
+	/**
+	 *
+	 * do_over - What the name says
+	 *
+	 **/
+	public function do_over() {
+		log_message('debug', "*** do_over");
+		$this->load->template('register');            
+	}
+
+	/**
+	 *
+	 * submit - Save the user's data
+	 *
+	 **/
+	public function submit() {
+		log_message('debug', "*** submit");
+
+		// Create insertion array
+		$data = array(
+				'first_name'=> $this->input->post('first_name'),
+				'last_name'=> $this->input->post('last_name'),
+				'email'=> $this->input->post('email'),
+				'company'=> $this->input->post('company'),
+				'address_1'=> $this->input->post('address_1'),
+				'address_2'=> $this->input->post('address_2'),
+				'city'=> $this->input->post('city'),
+				'state'=> $this->input->post('state'),
+				'zip'=> $this->input->post('zip'),
+				'website'=> $this->input->post('website'),
+				'phone'=> $this->input->post('phone'),
+				'referral'=> $this->input->post('referral'),
+				'operating_system'=> $this->input->post('operating_system'),
+			);
+
+		$this->db->insert('registration', $data);
+
+		// Go to success page!!!
+		$this->load->template('register_success');            
 	}
 }
 
